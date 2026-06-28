@@ -8,9 +8,9 @@ gText_Carter_Welcome::
 	.string "$"
 
 gText_Carter_Pokemon::
-	.string “Let me show you one of my POKéMON!\p”
-	.string “\n”
-	.string “$”
+	.string "Let me show you one of my POKéMON!\p"
+	.string "\n"
+	.string "$"
 
 gText_Carter_MainSpeech::
 	.string "This world is widely inhabited by\n"
