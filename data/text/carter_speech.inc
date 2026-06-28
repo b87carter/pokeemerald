@@ -1,15 +1,16 @@
 gText_Carter_Welcome::
 	.string "Hey dude! Welcome to your\n"
-	.string "own POKéMON Emerald!\p"
+	.string "very own version of\l"
+	.string "POKéMON Emerald!\p"
 	.string "This is BEN, but here everyone\n"
 	.string "just calls me the POKéMON\l"
 	.string "PROFESSOR.\p"
 	.string "$"
 
 gText_Carter_Pokemon::
-	.string "This is what we call a “POKéMON.”\p"
-	.string "\n"
-	.string "$"
+	.string “Let me show you one of my POKéMON!\p”
+	.string “\n”
+	.string “$”
 
 gText_Carter_MainSpeech::
 	.string "This world is widely inhabited by\n"
@@ -48,13 +49,13 @@ gText_Carter_SoItsPlayer::
 	.string "So it's {PLAYER}{KUN}?$"
 
 gText_Carter_YourePlayer::
-	.string "Hell yeah, so you're\n"
-	.string "{PLAYER}{KUN} who's moving to my\l"
-	.string "hometown of LITTLEROOT.\p"
+	.string "Hell yeah {PLAYER}, allow me\n"
+	.string "to welcome you to the lovely\l"
+	.string "town of LITTLEROOT.\p"
 	.string "$"
 
 gText_Carter_AreYouReady::
-	.string "All right, are you ready?\p"
+	.string "Are you ready?\p"
 	.string "Your adventure is about to unfold.\p"
 	.string "Have fun as you leap back into\n"
 	.string "the world of POKéMON that we\l"
