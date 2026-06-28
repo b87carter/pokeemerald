@@ -13,6 +13,8 @@
 #include "random.h"
 #include "starter_choose.h"
 #include "script_pokemon_util.h"
+#include "pokemon.h"
+#include "pokedex.h"
 #include "palette.h"
 #include "window.h"
 #include "event_object_movement.h"
@@ -917,10 +919,30 @@ void ChooseStarter(void)
 static void CB2_GiveStarter(void)
 {
     u16 starterMon;
+    u32 otId, personality;
+    u16 nationalDexNum;
+    struct Pokemon mon;
 
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
-    ScriptGiveMon(starterMon, 5, ITEM_NONE, 0, 0, 0);
+
+    // Read the player's trainer ID the same way CreateBoxMon does for OT_ID_PLAYER_ID.
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+         | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+         | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+         | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    // Randomise the low 16 bits (influences gender/nature for some species), then
+    // set the high 16 bits so GET_SHINY_VALUE evaluates to 0, guaranteeing shininess.
+    personality = Random32();
+    personality = ((u32)(HIHALF(otId) ^ LOHALF(otId) ^ LOHALF(personality)) << 16) | LOHALF(personality);
+
+    CreateMon(&mon, starterMon, 5, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    GiveMonToPlayer(&mon);
+    nationalDexNum = SpeciesToNationalPokedexNum(starterMon);
+    GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
+    GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
