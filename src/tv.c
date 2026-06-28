@@ -3383,16 +3383,16 @@ u8 CheckForPlayersHouseNews(void)
     return PLAYERS_HOUSE_TV_LATI;
 }
 
-void GetMomOrDadStringForTVMessage(void)
+void GetSusanOrDadStringForTVMessage(void)
 {
-    // If the player is checking the TV in their house it will only refer to their Mom.
+    // If the player is checking the TV in their house it will only refer to their Susan.
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
             if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
-                StringCopy(gStringVar1, gText_Mom);
+                StringCopy(gStringVar1, gText_Susan);
                 VarSet(VAR_TEMP_3, 1);
             }
         }
@@ -3400,14 +3400,14 @@ void GetMomOrDadStringForTVMessage(void)
         {
             if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             {
-                StringCopy(gStringVar1, gText_Mom);
+                StringCopy(gStringVar1, gText_Susan);
                 VarSet(VAR_TEMP_3, 1);
             }
         }
     }
     if (VarGet(VAR_TEMP_3) == 1)
     {
-        StringCopy(gStringVar1, gText_Mom);
+        StringCopy(gStringVar1, gText_Susan);
     }
     else if (VarGet(VAR_TEMP_3) == 2)
     {
@@ -3417,18 +3417,18 @@ void GetMomOrDadStringForTVMessage(void)
     {
         // Should only happen if VAR_TEMP_3 is already in use by something else.
         if (VarGet(VAR_TEMP_3) % 2 == 0)
-            StringCopy(gStringVar1, gText_Mom);
+            StringCopy(gStringVar1, gText_Susan);
         else
             StringCopy(gStringVar1, gText_Dad);
     }
     else
     {
-        // Randomly choose whether to refer to Mom or Dad.
+        // Randomly choose whether to refer to Susan or Dad.
         // NOTE: Because of this, any map that has a TV in it shouldn't rely on VAR_TEMP_3.
         //       If its value is 0, checking the TV will set it to 1 or 2.
         if (Random() % 2 != 0)
         {
-            StringCopy(gStringVar1, gText_Mom);
+            StringCopy(gStringVar1, gText_Susan);
             VarSet(VAR_TEMP_3, 1);
         }
         else

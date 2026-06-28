@@ -1889,16 +1889,16 @@ static const struct SpriteFrameImage sPicTable_Azurill[] = {
     overworld_frame(gObjectEventPic_Azurill, 2, 2, 2),
 };
 
-static const struct SpriteFrameImage sPicTable_Mom[] = {
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 0),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 1),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 2),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 3),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 4),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 5),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 6),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 7),
-    overworld_frame(gObjectEventPic_Mom, 2, 4, 8),
+static const struct SpriteFrameImage sPicTable_Susan[] = {
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 2),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 3),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 4),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 5),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 6),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 7),
+    overworld_frame(gObjectEventPic_Susan, 2, 4, 8),
 };
 
 static const struct SpriteFrameImage sPicTable_Scott[] = {

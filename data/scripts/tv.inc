@@ -5,8 +5,8 @@ EventScript_TV::
 	specialvar VAR_RESULT, CheckForPlayersHouseNews
 	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_MOVIE, EventScript_PlayersHouseMovie
 	goto_if_eq VAR_RESULT, PLAYERS_HOUSE_TV_LATI, EventScript_PlayersHouseLatiNewsFlash
-	goto_if_unset FLAG_SYS_TV_START, EventScript_MomDadMightLikeThis1
-	goto_if_set FLAG_SYS_TV_WATCH, EventScript_MomDadMightLikeThis1
+	goto_if_unset FLAG_SYS_TV_START, EventScript_SusanDadMightLikeThis1
+	goto_if_set FLAG_SYS_TV_WATCH, EventScript_SusanDadMightLikeThis1
 	specialvar VAR_RESULT, IsGabbyAndTyShowOnTheAir
 	goto_if_eq VAR_RESULT, TRUE, EventScript_DoInSearchOfTrainers
 	goto EventScript_TryDoPokeNews
@@ -14,17 +14,17 @@ EventScript_TV::
 
 EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
-	goto_if_eq VAR_0x8004, 255, EventScript_MomDadMightLikeThis2
+	goto_if_eq VAR_0x8004, 255, EventScript_SusanDadMightLikeThis2
 	specialvar VAR_RESULT, GetNextActiveShowIfMassOutbreak
-	goto_if_eq VAR_RESULT, 255, EventScript_MomDadMightLikeThis2
+	goto_if_eq VAR_RESULT, 255, EventScript_SusanDadMightLikeThis2
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, GetSelectedTVShow
 	goto_if_ne VAR_RESULT, 0, EventScript_DoTVShow
 	end
 
-EventScript_MomDadMightLikeThis1::
-	special GetMomOrDadStringForTVMessage
-	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
+EventScript_SusanDadMightLikeThis1::
+	special GetSusanOrDadStringForTVMessage
+	msgbox gText_SusanOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
@@ -35,7 +35,7 @@ EventScript_PlayersHouseMovie::
 	end
 
 @ special InitRoamer is a junk call. Its input var (VAR_0x8004) hasn't been set, and
-@ It's called again when Mom actually asks for the color, overwriting
+@ It's called again when Susan actually asks for the color, overwriting
 @ whatever it does here.
 EventScript_PlayersHouseLatiNewsFlash::
 	msgbox PlayersHouse_1F_Text_LatiEmergencyNewsFlash, MSGBOX_DEFAULT
@@ -62,9 +62,9 @@ EventScript_TurnOffTV::
 	releaseall
 	end
 
-EventScript_MomDadMightLikeThis2::
-	special GetMomOrDadStringForTVMessage
-	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
+EventScript_SusanDadMightLikeThis2::
+	special GetSusanOrDadStringForTVMessage
+	msgbox gText_SusanOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	goto EventScript_TurnOffTV
 	end
 

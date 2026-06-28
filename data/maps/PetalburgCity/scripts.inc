@@ -89,7 +89,7 @@ PetalburgCity_EventScript_Boy::
 	release
 	end
 
-PetalburgCity_EventScript_WallysMom::
+PetalburgCity_EventScript_WallysSusan::
 	msgbox PetalburgCity_Text_WhereIsWally, MSGBOX_NPC
 	end
 

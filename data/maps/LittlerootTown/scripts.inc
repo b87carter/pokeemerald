@@ -37,9 +37,9 @@ LittlerootTown_MapScripts::
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	call Common_EventScript_SetupRivalGfxId
-	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_MoveMomToMaysDoor
+	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_MoveSusanToMaysDoor
 	call_if_unset FLAG_RESCUED_CARTER, LittlerootTown_EventScript_SetTwinPos
-	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
+	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetSusanStandingInFrontOfDoorPos
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	call_if_eq VAR_OLDALE_RIVAL_STATE, 1, LittlerootTown_EventScript_MoveRivalFromOldale
@@ -70,8 +70,8 @@ LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent::
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 5
 	return
 
-LittlerootTown_EventScript_MoveMomToMaysDoor::
-	setobjectxyperm LOCALID_LITTLEROOT_MOM, 14, 8
+LittlerootTown_EventScript_MoveSusanToMaysDoor::
+	setobjectxyperm LOCALID_LITTLEROOT_SUSAN, 14, 8
 	return
 
 LittlerootTown_EventScript_SetTwinPos::
@@ -85,20 +85,20 @@ LittlerootTown_EventScript_SetTwinGuardingRoutePos::
 	setobjectmovementtype LOCALID_LITTLEROOT_TWIN, MOVEMENT_TYPE_FACE_DOWN
 	return
 
-LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos::
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setobjectmovementtype LOCALID_LITTLEROOT_MOM, MOVEMENT_TYPE_FACE_DOWN
+LittlerootTown_EventScript_SetSusanStandingInFrontOfDoorPos::
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_SUSAN_OUTSIDE
+	setobjectmovementtype LOCALID_LITTLEROOT_SUSAN, MOVEMENT_TYPE_FACE_DOWN
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetMomInFrontOfDoorMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetMomInFrontOfDoorFemale
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetSusanInFrontOfDoorMale
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetSusanInFrontOfDoorFemale
 	return
 
-LittlerootTown_EventScript_SetMomInFrontOfDoorMale::
-	setobjectxyperm LOCALID_LITTLEROOT_MOM, 5, 9
+LittlerootTown_EventScript_SetSusanInFrontOfDoorMale::
+	setobjectxyperm LOCALID_LITTLEROOT_SUSAN, 5, 9
 	return
 
-LittlerootTown_EventScript_SetMomInFrontOfDoorFemale::
-	setobjectxyperm LOCALID_LITTLEROOT_MOM, 14, 9
+LittlerootTown_EventScript_SetSusanInFrontOfDoorFemale::
+	setobjectxyperm LOCALID_LITTLEROOT_SUSAN, 14, 9
 	return
 
 LittlerootTown_OnFrame:
@@ -111,7 +111,7 @@ LittlerootTown_EventScript_StepOffTruckMale::
 	lockall
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 8
-	call LittlerootTown_EventScript_GoInsideWithMom
+	call LittlerootTown_EventScript_GoInsideWithSusan
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
 	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 8, 8
 	waitstate
@@ -122,39 +122,39 @@ LittlerootTown_EventScript_StepOffTruckFemale::
 	lockall
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
-	call LittlerootTown_EventScript_GoInsideWithMom
+	call LittlerootTown_EventScript_GoInsideWithSusan
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
 	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 2, 8
 	waitstate
 	releaseall
 	end
 
-LittlerootTown_EventScript_GoInsideWithMom::
+LittlerootTown_EventScript_GoInsideWithSusan::
 	delay 15
 	playse SE_LEDGE
 	applymovement LOCALID_PLAYER, LittlerootTown_Movement_PlayerStepOffTruck
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
-	addobject LOCALID_LITTLEROOT_MOM
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitHouse
+	addobject LOCALID_LITTLEROOT_SUSAN
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitHouse
 	waitmovement 0
 	closedoor VAR_0x8004, VAR_0x8005
 	waitdooranim
 	delay 10
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerAtTruck
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerAtTruck
 	waitmovement 0
 	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachDoor
 	applymovement LOCALID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
 	waitmovement 0
 	opendoor VAR_0x8004, VAR_0x8005
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomEnterHouse
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanEnterHouse
 	applymovement LOCALID_PLAYER, LittlerootTown_Movement_PlayerEnterHouse
 	waitmovement 0
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_SUSAN_OUTSIDE
 	setvar VAR_LITTLEROOT_INTRO_STATE, 3
 	hideplayer
 	closedoor VAR_0x8004, VAR_0x8005
@@ -163,22 +163,22 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	return
 
-LittlerootTown_Movement_MomExitHouse:
+LittlerootTown_Movement_SusanExitHouse:
 	walk_down
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerAtTruck:
+LittlerootTown_Movement_SusanApproachPlayerAtTruck:
 	walk_down
 	walk_in_place_faster_left
 	step_end
 
-LittlerootTown_Movement_MomApproachDoor:
+LittlerootTown_Movement_SusanApproachDoor:
 	delay_16
 	delay_8
 	walk_up
 	step_end
 
-LittlerootTown_Movement_MomEnterHouse:
+LittlerootTown_Movement_SusanEnterHouse:
 	walk_up
 	set_invisible
 	step_end
@@ -430,14 +430,14 @@ LittlerootTown_EventScript_PlayersHouseSignFemale::
 LittlerootTown_EventScript_GiveRunningShoesTrigger0::
 	lockall
 	setvar VAR_0x8008, 0
-	setobjectxy LOCALID_LITTLEROOT_MOM, 10, 9
+	setobjectxy LOCALID_LITTLEROOT_SUSAN, 10, 9
 	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
 	end
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger1::
 	lockall
 	setvar VAR_0x8008, 1
-	setobjectxy LOCALID_LITTLEROOT_MOM, 11, 9
+	setobjectxy LOCALID_LITTLEROOT_SUSAN, 11, 9
 	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
 	end
 
@@ -467,20 +467,20 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger5::
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SusanNoticePlayerMale
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SusanNoticePlayerFemale
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
 	msgbox LittlerootTown_Text_WaitPlayer, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomApproachPlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomApproachPlayerFemale
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SusanApproachPlayerMale
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SusanApproachPlayerFemale
 	call LittlerootTown_EventScript_GiveRunningShoes
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomReturnHomeMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomReturnHomeFemale
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SusanReturnHomeMale
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SusanReturnHomeFemale
 	goto LittlerootTown_EventScript_SetReceivedRunningShoes
 	end
 
@@ -494,229 +494,229 @@ LittlerootTown_EventScript_SetHomeDoorCoordsFemale::
 	setvar VAR_0x800A, 8
 	return
 
-LittlerootTown_EventScript_MomNoticePlayerMale::
-	applymovement LOCALID_LITTLEROOT_MOM, Common_Movement_WalkInPlaceFasterRight
+LittlerootTown_EventScript_SusanNoticePlayerMale::
+	applymovement LOCALID_LITTLEROOT_SUSAN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomNoticePlayerFemale::
-	applymovement LOCALID_LITTLEROOT_MOM, Common_Movement_WalkInPlaceFasterLeft
+LittlerootTown_EventScript_SusanNoticePlayerFemale::
+	applymovement LOCALID_LITTLEROOT_SUSAN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerMale::
-	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_MomApproachPlayer0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_MomApproachPlayer1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_MomApproachPlayerMale2
-	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_MomApproachPlayerMale3
-	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_MomApproachPlayerMale4
-	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_MomApproachPlayerMale5
+LittlerootTown_EventScript_SusanApproachPlayerMale::
+	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_SusanApproachPlayer0
+	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_SusanApproachPlayer1
+	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_SusanApproachPlayerMale2
+	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_SusanApproachPlayerMale3
+	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_SusanApproachPlayerMale4
+	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_SusanApproachPlayerMale5
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerFemale::
-	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_MomApproachPlayer0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_MomApproachPlayer1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_MomApproachPlayerFemale2
-	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_MomApproachPlayerFemale3
-	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_MomApproachPlayerFemale4
-	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_MomApproachPlayerFemale5
+LittlerootTown_EventScript_SusanApproachPlayerFemale::
+	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_SusanApproachPlayer0
+	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_SusanApproachPlayer1
+	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_SusanApproachPlayerFemale2
+	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_SusanApproachPlayerFemale3
+	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_SusanApproachPlayerFemale4
+	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_SusanApproachPlayerFemale5
 	return
 
-LittlerootTown_EventScript_MomApproachPlayer0::
+LittlerootTown_EventScript_SusanApproachPlayer0::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayer0
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayer0
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayer1::
+LittlerootTown_EventScript_SusanApproachPlayer1::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayer1
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayer1
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerMale2::
+LittlerootTown_EventScript_SusanApproachPlayerMale2::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerMale2
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerMale2
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerMale3::
+LittlerootTown_EventScript_SusanApproachPlayerMale3::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerMale3
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerMale3
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerMale4::
+LittlerootTown_EventScript_SusanApproachPlayerMale4::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerMale4
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerMale4
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerMale5::
+LittlerootTown_EventScript_SusanApproachPlayerMale5::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerMale5
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerMale5
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerFemale2::
+LittlerootTown_EventScript_SusanApproachPlayerFemale2::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerFemale2
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerFemale2
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerFemale3::
+LittlerootTown_EventScript_SusanApproachPlayerFemale3::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerFemale3
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerFemale3
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerFemale4::
+LittlerootTown_EventScript_SusanApproachPlayerFemale4::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerFemale4
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerFemale4
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomApproachPlayerFemale5::
+LittlerootTown_EventScript_SusanApproachPlayerFemale5::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomApproachPlayerFemale5
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanApproachPlayerFemale5
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomReturnHomeMale::
-	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_MomReturnHome0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_MomReturnHome1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_MomReturnHomeMale2
-	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_MomReturnHomeMale3
-	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_MomReturnHomeMale4
-	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_MomReturnHomeMale5
+LittlerootTown_EventScript_SusanReturnHomeMale::
+	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_SusanReturnHome0
+	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_SusanReturnHome1
+	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_SusanReturnHomeMale2
+	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_SusanReturnHomeMale3
+	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_SusanReturnHomeMale4
+	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_SusanReturnHomeMale5
 	return
 
-LittlerootTown_EventScript_MomReturnHomeFemale::
-	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_MomReturnHome0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_MomReturnHome1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_MomReturnHomeFemale2
-	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_MomReturnHomeFemale3
-	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_MomReturnHomeFemale4
-	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_MomReturnHomeFemale5
+LittlerootTown_EventScript_SusanReturnHomeFemale::
+	call_if_eq VAR_0x8008, 0, LittlerootTown_EventScript_SusanReturnHome0
+	call_if_eq VAR_0x8008, 1, LittlerootTown_EventScript_SusanReturnHome1
+	call_if_eq VAR_0x8008, 2, LittlerootTown_EventScript_SusanReturnHomeFemale2
+	call_if_eq VAR_0x8008, 3, LittlerootTown_EventScript_SusanReturnHomeFemale3
+	call_if_eq VAR_0x8008, 4, LittlerootTown_EventScript_SusanReturnHomeFemale4
+	call_if_eq VAR_0x8008, 5, LittlerootTown_EventScript_SusanReturnHomeFemale5
 	return
 
-LittlerootTown_EventScript_MomReturnHome0::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHome0
+LittlerootTown_EventScript_SusanReturnHome0::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHome0
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomReturnHome1::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHome1
+LittlerootTown_EventScript_SusanReturnHome1::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHome1
 	waitmovement 0
 	return
 
-LittlerootTown_EventScript_MomReturnHomeMale2::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeMale2
+LittlerootTown_EventScript_SusanReturnHomeMale2::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeMale2
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeMale3::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeMale3
+LittlerootTown_EventScript_SusanReturnHomeMale3::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeMale3
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeMale4::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeMale4
+LittlerootTown_EventScript_SusanReturnHomeMale4::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeMale4
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeMale5::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeMale5
+LittlerootTown_EventScript_SusanReturnHomeMale5::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeMale5
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeFemale2::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeFemale2
+LittlerootTown_EventScript_SusanReturnHomeFemale2::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeFemale2
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeFemale3::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeFemale3
+LittlerootTown_EventScript_SusanReturnHomeFemale3::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeFemale3
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeFemale4::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeFemale4
+LittlerootTown_EventScript_SusanReturnHomeFemale4::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeFemale4
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_EventScript_MomReturnHomeFemale5::
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomReturnHomeFemale5
+LittlerootTown_EventScript_SusanReturnHomeFemale5::
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanReturnHomeFemale5
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	return
 
-LittlerootTown_Movement_MomApproachPlayer0:
+LittlerootTown_Movement_SusanApproachPlayer0:
 	walk_up
 	walk_up
 	walk_up
@@ -725,7 +725,7 @@ LittlerootTown_Movement_MomApproachPlayer0:
 	walk_up
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayer1:
+LittlerootTown_Movement_SusanApproachPlayer1:
 	walk_up
 	walk_up
 	walk_up
@@ -734,14 +734,14 @@ LittlerootTown_Movement_MomApproachPlayer1:
 	walk_up
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerMale2:
+LittlerootTown_Movement_SusanApproachPlayerMale2:
 	walk_right
 	walk_right
 	walk_right
 	walk_right
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerMale3:
+LittlerootTown_Movement_SusanApproachPlayerMale3:
 	walk_right
 	walk_right
 	walk_right
@@ -749,44 +749,44 @@ LittlerootTown_Movement_MomApproachPlayerMale3:
 	walk_right
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerMale4:
+LittlerootTown_Movement_SusanApproachPlayerMale4:
 	walk_right
 	walk_right
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerMale5:
+LittlerootTown_Movement_SusanApproachPlayerMale5:
 	walk_right
 	walk_right
 	walk_right
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerFemale2:
+LittlerootTown_Movement_SusanApproachPlayerFemale2:
 	walk_left
 	walk_left
 	walk_left
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerFemale3:
+LittlerootTown_Movement_SusanApproachPlayerFemale3:
 	walk_left
 	walk_left
 	step_end
 
-LittlerootTown_Movement_MomApproachPlayerFemale4:
+LittlerootTown_Movement_SusanApproachPlayerFemale4:
 	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	step_end
-
-LittlerootTown_Movement_MomApproachPlayerFemale5:
 	walk_left
 	walk_left
 	walk_left
 	walk_left
 	step_end
 
-LittlerootTown_Movement_MomReturnHome0:
+LittlerootTown_Movement_SusanApproachPlayerFemale5:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+LittlerootTown_Movement_SusanReturnHome0:
 	walk_down
 	walk_down
 	walk_down
@@ -794,7 +794,7 @@ LittlerootTown_Movement_MomReturnHome0:
 	walk_down
 	step_end
 
-LittlerootTown_Movement_MomReturnHome1:
+LittlerootTown_Movement_SusanReturnHome1:
 	walk_down
 	walk_down
 	walk_down
@@ -802,7 +802,7 @@ LittlerootTown_Movement_MomReturnHome1:
 	walk_down
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeMale2:
+LittlerootTown_Movement_SusanReturnHomeMale2:
 	walk_left
 	walk_left
 	walk_left
@@ -810,7 +810,7 @@ LittlerootTown_Movement_MomReturnHomeMale2:
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeMale3:
+LittlerootTown_Movement_SusanReturnHomeMale3:
 	walk_left
 	walk_left
 	walk_left
@@ -819,42 +819,34 @@ LittlerootTown_Movement_MomReturnHomeMale3:
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeMale4:
+LittlerootTown_Movement_SusanReturnHomeMale4:
 	walk_left
 	walk_left
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeMale5:
+LittlerootTown_Movement_SusanReturnHomeMale5:
 	walk_left
 	walk_left
 	walk_left
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeFemale2:
+LittlerootTown_Movement_SusanReturnHomeFemale2:
 	walk_right
 	walk_right
 	walk_right
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeFemale3:
+LittlerootTown_Movement_SusanReturnHomeFemale3:
 	walk_right
 	walk_right
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomReturnHomeFemale4:
+LittlerootTown_Movement_SusanReturnHomeFemale4:
 	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-LittlerootTown_Movement_MomReturnHomeFemale5:
 	walk_right
 	walk_right
 	walk_right
@@ -862,31 +854,39 @@ LittlerootTown_Movement_MomReturnHomeFemale5:
 	walk_in_place_faster_up
 	step_end
 
-LittlerootTown_Movement_MomExitThroughDoor:
+LittlerootTown_Movement_SusanReturnHomeFemale5:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_faster_up
+	step_end
+
+LittlerootTown_Movement_SusanExitThroughDoor:
 	walk_up
 	step_end
 
-LittlerootTown_EventScript_Mom::
+LittlerootTown_EventScript_Susan::
 	lock
 	faceplayer
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
 	call LittlerootTown_EventScript_GiveRunningShoes
-	applymovement LOCALID_LITTLEROOT_MOM, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_LITTLEROOT_SUSAN, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	opendoor VAR_0x8009, VAR_0x800A
 	waitdooranim
-	applymovement LOCALID_LITTLEROOT_MOM, LittlerootTown_Movement_MomExitThroughDoor
+	applymovement LOCALID_LITTLEROOT_SUSAN, LittlerootTown_Movement_SusanExitThroughDoor
 	waitmovement 0
-	hideobjectat LOCALID_LITTLEROOT_MOM, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_LITTLEROOT_SUSAN, MAP_LITTLEROOT_TOWN
 	closedoor VAR_0x8009, VAR_0x800A
 	waitdooranim
 	goto LittlerootTown_EventScript_SetReceivedRunningShoes
 	end
 
 LittlerootTown_EventScript_SetReceivedRunningShoes::
-	removeobject LOCALID_LITTLEROOT_MOM
+	removeobject LOCALID_LITTLEROOT_SUSAN
 	setflag FLAG_SYS_B_DASH
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
 	release
@@ -905,7 +905,7 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
+	.string "SUSAN: {PLAYER}, we're here, Mr. Dulin!\p"
 	.string "It must be tiring riding with our things\n"
 	.string "in the moving truck.\p"
 	.string "Well, this is LITTLEROOT TOWN.\p"
@@ -917,16 +917,16 @@ LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "Let's go inside.$"
 
 LittlerootTown_Text_WaitPlayer:
-	.string "MOM: Wait, {PLAYER}!$"
+	.string "SUSAN: Wait, {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
+	.string "SUSAN: {PLAYER}! {PLAYER}! Did you\n"
 	.string "introduce yourself to PROF. CARTER?\p"
 	.string "Oh! What an adorable POKéMON!\n"
 	.string "You got it from PROF. CARTER. How nice!\p"
 	.string "You're your father's child, all right.\n"
 	.string "You look good together with POKéMON!\p"
-	.string "Here, honey! If you're going out on an\n"
+	.string "Here, Mr. Dulin! If you're going out on an\n"
 	.string "adventure, wear these RUNNING SHOES.\p"
 	.string "They'll put a zip in your step!$"
 
@@ -935,7 +935,7 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "RUNNING SHOES.$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: {PLAYER}, those shoes came with\n"
+	.string "SUSAN: {PLAYER}, those shoes came with\n"
 	.string "instructions.\p"
 	.string "“Press the B Button while wearing these\n"
 	.string "RUNNING SHOES to run extra-fast!\p"
@@ -950,7 +950,7 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "Your father will be overjoyed.\p"
 	.string "…But please be careful.\n"
 	.string "If anything happens, you can come home.\p"
-	.string "Go on, go get them, honey!$"
+	.string "Go on, go get them, Mr. Dulin!$"
 
 LittlerootTown_Text_CanUsePCToStoreItems:
 	.string "If you use a PC, you can store items\n"
