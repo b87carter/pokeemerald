@@ -169,6 +169,7 @@
 // Static RAM declarations
 
 static EWRAM_DATA bool8 sStartedPokeBallTask = 0;
+static EWRAM_DATA bool8 sBralenNameChosen = 0;
 static EWRAM_DATA u16 sCurrItemAndOptionMenuCheck = 0;
 
 static u8 sBirchSpeechMainTaskId;
@@ -222,6 +223,9 @@ static void Task_NewGameBirchSpeech_SlideOutOldGenderSprite(u8);
 static void Task_NewGameBirchSpeech_SlideInNewGenderSprite(u8);
 static void Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint(u8);
 static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8);
+static void Task_NewGameBirchSpeech_WaitThenShowBralenMenu(u8);
+static void Task_NewGameBirchSpeech_ProcessBralenMenu(u8);
+static void Task_NewGameBirchSpeech_WaitForYourePlayerText(u8);
 static void Task_NewGameBirchSpeech_StartNamingScreen(u8);
 static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void);
 static void NewGameBirchSpeech_SetDefaultPlayerName(u8);
@@ -239,6 +243,7 @@ static void Task_NewGameBirchSpeech_FadePlayerToWhite(u8);
 static void Task_NewGameBirchSpeech_Cleanup(u8);
 static void SpriteCB_Null(struct Sprite *);
 static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8);
+static void Task_NewGameBirchSpeech_SoItsPlayerName(u8);
 static void MainMenu_FormatSavegamePlayer(void);
 static void MainMenu_FormatSavegamePokedex(void);
 static void MainMenu_FormatSavegameTime(void);
@@ -456,6 +461,8 @@ static const struct MenuAction sMenuActions_Gender[] = {
     {gText_BirchBoy, {NULL}},
     {gText_BirchGirl, {NULL}}
 };
+
+static const u8 sNameBralen[] = _("BRALEN");
 
 static const u8 *const sMalePresetNames[] = {
     gText_DefaultNameStu,
@@ -1412,9 +1419,46 @@ static void Task_NewGameBirchSpeech_AndYouAre(u8 taskId)
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         sStartedPokeBallTask = FALSE;
+        sBralenNameChosen = FALSE;
         StringExpandPlaceholders(gStringVar4, gText_Birch_AndYouAre);
         AddTextPrinterForMessage(TRUE);
-        gTasks[taskId].func = Task_NewGameBirchSpeech_StartBirchLotadPlatformFade;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_WaitThenShowBralenMenu;
+    }
+}
+
+static void Task_NewGameBirchSpeech_WaitThenShowBralenMenu(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        CreateYesNoMenuParameterized(2, 1, 0xF3, 0xDF, 2, 15);
+        gTasks[taskId].func = Task_NewGameBirchSpeech_ProcessBralenMenu;
+    }
+}
+
+static void Task_NewGameBirchSpeech_ProcessBralenMenu(u8 taskId)
+{
+    u8 i;
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+        case 0: // Yes — set name and gender, skip straight to YourePlayer text
+            PlaySE(SE_SELECT);
+            gSaveBlock2Ptr->playerGender = MALE;
+            for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+                gSaveBlock2Ptr->playerName[i] = sNameBralen[i];
+            gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
+            NewGameBirchSpeech_ClearWindow(0);
+            StringExpandPlaceholders(gStringVar4, gText_Birch_YourePlayer);
+            AddTextPrinterForMessage(TRUE);
+            gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForYourePlayerText;
+            break;
+        case MENU_B_PRESSED:
+        case 1: // No — loop with a persuasive message
+            PlaySE(SE_SELECT);
+            NewGameBirchSpeech_ClearWindow(0);
+            StringExpandPlaceholders(gStringVar4, gText_Birch_NotBralen);
+            AddTextPrinterForMessage(TRUE);
+            gTasks[taskId].func = Task_NewGameBirchSpeech_WaitThenShowBralenMenu;
+            break;
     }
 }
 
@@ -1478,6 +1522,18 @@ static void Task_NewGameBirchSpeech_WaitForPlayerFadeIn(u8 taskId)
     {
         gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
         gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
+    }
+}
+
+static void Task_NewGameBirchSpeech_WaitForYourePlayerText(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        gSprites[gTasks[taskId].tBirchSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        gSprites[gTasks[taskId].tLotadSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+        NewGameBirchSpeech_StartFadeOutTarget1InTarget2(taskId, 2);
+        gTasks[taskId].tTimer = 64;
+        gTasks[taskId].func = Task_NewGameBirchSpeech_AreYouReady;
     }
 }
 

@@ -29,7 +29,12 @@ gText_Birch_MainSpeech::
 	.string "$"
 
 gText_Birch_AndYouAre::
-	.string "And you are?$"
+	.string "And you're BRALEN, right?$"
+
+gText_Birch_NotBralen::
+	.string "Come on dude, quit\n"
+	.string "fucking with me!\l"
+	.string "You're BRALEN, right?$"
 
 gText_Birch_BoyOrGirl::
 	.string "Are you a boy?\n"
@@ -43,10 +48,9 @@ gText_Birch_SoItsPlayer::
 	.string "So it's {PLAYER}{KUN}?$"
 
 gText_Birch_YourePlayer::
-	.string "Ah, okay!\p"
-	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of LITTLEROOT.\l"
-	.string "I get it now!\p"
+	.string "Hell yeah, so you're\n"
+	.string "{PLAYER}{KUN} who's moving to my\l"
+	.string "hometown of LITTLEROOT.\p"
 	.string "$"
 
 gText_Birch_AreYouReady::
