@@ -1,17 +1,17 @@
-gText_Birch_Welcome::
+gText_Carter_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is BIRCH.\p"
+	.string "My name is CARTER.\p"
 	.string "But everyone calls me the POKéMON\n"
 	.string "PROFESSOR.\p"
 	.string "$"
 
-gText_Birch_Pokemon::
+gText_Carter_Pokemon::
 	.string "This is what we call a “POKéMON.”\p"
 	.string "\n"
 	.string "$"
 
-gText_Birch_MainSpeech::
+gText_Carter_MainSpeech::
 	.string "This world is widely inhabited by\n"
 	.string "creatures known as POKéMON.\p"
 	.string "We humans live alongside POKéMON,\n"
@@ -28,32 +28,32 @@ gText_Birch_MainSpeech::
 	.string "That's what I do.\p"
 	.string "$"
 
-gText_Birch_AndYouAre::
+gText_Carter_AndYouAre::
 	.string "And you're BRALEN, right?$"
 
-gText_Birch_NotBralen::
+gText_Carter_NotBralen::
 	.string "Come on dude, quit\n"
 	.string "fucking with me!\l"
 	.string "You're BRALEN, right?$"
 
-gText_Birch_BoyOrGirl::
+gText_Carter_BoyOrGirl::
 	.string "Are you a boy?\n"
 	.string "Or are you a girl?$"
 
-gText_Birch_WhatsYourName::
+gText_Carter_WhatsYourName::
 	.string "All right.\n"
 	.string "What's your name?$"
 
-gText_Birch_SoItsPlayer::
+gText_Carter_SoItsPlayer::
 	.string "So it's {PLAYER}{KUN}?$"
 
-gText_Birch_YourePlayer::
+gText_Carter_YourePlayer::
 	.string "Hell yeah, so you're\n"
 	.string "{PLAYER}{KUN} who's moving to my\l"
 	.string "hometown of LITTLEROOT.\p"
 	.string "$"
 
-gText_Birch_AreYouReady::
+gText_Carter_AreYouReady::
 	.string "All right, are you ready?\p"
 	.string "Your very own adventure is about\n"
 	.string "to unfold.\p"

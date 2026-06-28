@@ -323,7 +323,7 @@ extern const u8 gText_FemaleSymbol[];
 extern const u8 gText_SelectorArrow3[];
 extern const u8 gText_YesNo[];
 
-// main menu/birch speech text
+// main menu/carter speech text
 extern const u8 gText_SaveFileErased[];
 extern const u8 gText_SaveFileCorrupted[];
 extern const u8 gJPText_No1MSubCircuit[];
@@ -337,22 +337,22 @@ extern const u8 gText_MainMenuMysteryGift[];
 extern const u8 gText_WirelessNotConnected[];
 extern const u8 gText_MysteryGiftCantUse[];
 extern const u8 gText_MysteryEventsCantUse[];
-extern const u8 gText_Birch_Welcome[];
+extern const u8 gText_Carter_Welcome[];
 extern const u8 gText_ThisIsAPokemon[];
-extern const u8 gText_Birch_MainSpeech[];
-extern const u8 gText_Birch_AndYouAre[];
-extern const u8 gText_Birch_NotBralen[];
-extern const u8 gText_Birch_BoyOrGirl[];
-extern const u8 gText_Birch_WhatsYourName[];
-extern const u8 gText_Birch_SoItsPlayer[];
-extern const u8 gText_Birch_YourePlayer[];
-extern const u8 gText_Birch_AreYouReady[];
+extern const u8 gText_Carter_MainSpeech[];
+extern const u8 gText_Carter_AndYouAre[];
+extern const u8 gText_Carter_NotBralen[];
+extern const u8 gText_Carter_BoyOrGirl[];
+extern const u8 gText_Carter_WhatsYourName[];
+extern const u8 gText_Carter_SoItsPlayer[];
+extern const u8 gText_Carter_YourePlayer[];
+extern const u8 gText_Carter_AreYouReady[];
 extern const u8 gText_ContinueMenuPlayer[];
 extern const u8 gText_ContinueMenuTime[];
 extern const u8 gText_ContinueMenuPokedex[];
 extern const u8 gText_ContinueMenuBadges[];
-extern const u8 gText_BirchBoy[];
-extern const u8 gText_BirchGirl[];
+extern const u8 gText_CarterBoy[];
+extern const u8 gText_CarterGirl[];
 extern const u8 gText_DefaultNameStu[];
 extern const u8 gText_DefaultNameMilton[];
 extern const u8 gText_DefaultNameTom[];
@@ -394,7 +394,7 @@ extern const u8 gText_DefaultNameTerra[];
 extern const u8 gText_DefaultNameLucy[];
 extern const u8 gText_DefaultNameHalie[];
 
-extern const u8 gText_BirchInTrouble[];
+extern const u8 gText_CarterInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];
 
 // mystery event menu text
@@ -535,28 +535,28 @@ extern const u8 gText_SearchCompleted[];
 extern const u8 gText_NoMatchingPkmnWereFound[];
 extern const u8 gText_SelectorArrow[];
 
-// birch dex rating text
-extern const u8 gBirchDexRatingText_LessThan10[];
-extern const u8 gBirchDexRatingText_LessThan20[];
-extern const u8 gBirchDexRatingText_LessThan30[];
-extern const u8 gBirchDexRatingText_LessThan40[];
-extern const u8 gBirchDexRatingText_LessThan50[];
-extern const u8 gBirchDexRatingText_LessThan60[];
-extern const u8 gBirchDexRatingText_LessThan70[];
-extern const u8 gBirchDexRatingText_LessThan80[];
-extern const u8 gBirchDexRatingText_LessThan90[];
-extern const u8 gBirchDexRatingText_LessThan100[];
-extern const u8 gBirchDexRatingText_LessThan110[];
-extern const u8 gBirchDexRatingText_LessThan120[];
-extern const u8 gBirchDexRatingText_LessThan130[];
-extern const u8 gBirchDexRatingText_LessThan140[];
-extern const u8 gBirchDexRatingText_LessThan150[];
-extern const u8 gBirchDexRatingText_LessThan160[];
-extern const u8 gBirchDexRatingText_LessThan170[];
-extern const u8 gBirchDexRatingText_LessThan180[];
-extern const u8 gBirchDexRatingText_LessThan190[];
-extern const u8 gBirchDexRatingText_LessThan200[];
-extern const u8 gBirchDexRatingText_DexCompleted[];
+// carter dex rating text
+extern const u8 gCarterDexRatingText_LessThan10[];
+extern const u8 gCarterDexRatingText_LessThan20[];
+extern const u8 gCarterDexRatingText_LessThan30[];
+extern const u8 gCarterDexRatingText_LessThan40[];
+extern const u8 gCarterDexRatingText_LessThan50[];
+extern const u8 gCarterDexRatingText_LessThan60[];
+extern const u8 gCarterDexRatingText_LessThan70[];
+extern const u8 gCarterDexRatingText_LessThan80[];
+extern const u8 gCarterDexRatingText_LessThan90[];
+extern const u8 gCarterDexRatingText_LessThan100[];
+extern const u8 gCarterDexRatingText_LessThan110[];
+extern const u8 gCarterDexRatingText_LessThan120[];
+extern const u8 gCarterDexRatingText_LessThan130[];
+extern const u8 gCarterDexRatingText_LessThan140[];
+extern const u8 gCarterDexRatingText_LessThan150[];
+extern const u8 gCarterDexRatingText_LessThan160[];
+extern const u8 gCarterDexRatingText_LessThan170[];
+extern const u8 gCarterDexRatingText_LessThan180[];
+extern const u8 gCarterDexRatingText_LessThan190[];
+extern const u8 gCarterDexRatingText_LessThan200[];
+extern const u8 gCarterDexRatingText_DexCompleted[];
 
 // player pc text
 extern const u8 gText_WhatWouldYouLike[];
@@ -2498,8 +2498,8 @@ extern const u8 gText_TateLizaMatchCallDesc[];
 extern const u8 gText_JuanMatchCallDesc[];
 extern const u8 gText_EliteFourMatchCallDesc[];
 extern const u8 gText_ChampionMatchCallDesc[];
-extern const u8 gText_ProfBirchMatchCallDesc[];
-extern const u8 gText_ProfBirchMatchCallName[];
+extern const u8 gText_ProfCarterMatchCallDesc[];
+extern const u8 gText_ProfCarterMatchCallName[];
 extern const u8 gText_MatchCallSteven_Strategy[];
 extern const u8 gText_MatchCallSteven_Pokemon[];
 extern const u8 gText_MatchCallSteven_Intro1_BeforeMeteorFallsBattle[];

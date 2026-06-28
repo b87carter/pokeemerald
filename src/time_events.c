@@ -105,14 +105,14 @@ void WaitWeather(void)
     CreateTask(Task_WaitWeather, 80);
 }
 
-void InitBirchState(void)
+void InitCarterState(void)
 {
-    *GetVarPointer(VAR_BIRCH_STATE) = 0;
+    *GetVarPointer(VAR_CARTER_STATE) = 0;
 }
 
-void UpdateBirchState(u16 days)
+void UpdateCarterState(u16 days)
 {
-    u16 *state = GetVarPointer(VAR_BIRCH_STATE);
+    u16 *state = GetVarPointer(VAR_CARTER_STATE);
     *state += days;
     *state %= 7;
 }

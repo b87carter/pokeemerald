@@ -168,7 +168,7 @@ gStdScripts_End::
 	.include "data/maps/LittlerootTown_BrendansHouse_2F/scripts.inc"
 	.include "data/maps/LittlerootTown_MaysHouse_1F/scripts.inc"
 	.include "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc"
-	.include "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc"
+	.include "data/maps/LittlerootTown_ProfessorCartersLab/scripts.inc"
 	.include "data/maps/OldaleTown_House1/scripts.inc"
 	.include "data/maps/OldaleTown_House2/scripts.inc"
 	.include "data/maps/OldaleTown_PokemonCenter_1F/scripts.inc"
@@ -746,7 +746,7 @@ Common_EventScript_StopBrineysBoatMusic::
 	fadedefaultbgm
 	return
 
-	.include "data/scripts/prof_birch.inc"
+	.include "data/scripts/prof_carter.inc"
 
 @ Below could be split as ferry.inc aside from the Rusturf tunnel script
 Common_EventScript_FerryDepart::
@@ -1058,4 +1058,4 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/test_signpost.inc"
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
-	.include "data/text/birch_speech.inc"
+	.include "data/text/carter_speech.inc"

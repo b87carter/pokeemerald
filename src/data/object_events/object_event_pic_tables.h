@@ -747,16 +747,16 @@ static const struct SpriteFrameImage sPicTable_ItemBall[] = {
     obj_frame_tiles(gObjectEventPic_ItemBall),
 };
 
-static const struct SpriteFrameImage sPicTable_ProfBirch[] = {
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 0),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 1),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 2),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 3),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 4),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 5),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 6),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 7),
-    overworld_frame(gObjectEventPic_ProfBirch, 2, 4, 8),
+static const struct SpriteFrameImage sPicTable_ProfCarter[] = {
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 0),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 1),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 2),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 3),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 4),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 5),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 6),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 7),
+    overworld_frame(gObjectEventPic_ProfCarter, 2, 4, 8),
 };
 
 static const struct SpriteFrameImage sPicTable_Man4[] = {
@@ -949,8 +949,8 @@ static const struct SpriteFrameImage sPicTable_VigorothFacingAway[] = {
     overworld_frame(gObjectEventPic_Vigoroth, 4, 4, 4),
 };
 
-static const struct SpriteFrameImage sPicTable_BirchsBag[] = {
-    obj_frame_tiles(gObjectEventPic_BirchsBag),
+static const struct SpriteFrameImage sPicTable_CartersBag[] = {
+    obj_frame_tiles(gObjectEventPic_CartersBag),
 };
 
 static const struct SpriteFrameImage sPicTable_EnemyZigzagoon[] = {

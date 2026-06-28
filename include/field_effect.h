@@ -1,9 +1,9 @@
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
-extern const struct SpritePalette gNewGameBirchObjectPaletteInfo;
-extern const struct SpriteTemplate gNewGameBirchObjectTemplate;
-extern const struct OamData gNewGameBirchOamAttributes;
+extern const struct SpritePalette gNewGameCarterObjectPaletteInfo;
+extern const struct SpriteTemplate gNewGameCarterObjectTemplate;
+extern const struct OamData gNewGameCarterOamAttributes;
 
 extern s32 gFieldEffectArguments[8];
 extern void (*gPostMenuFieldCallback)(void);
@@ -13,7 +13,7 @@ u32 FieldEffectStart(u8 id);
 bool8 FieldEffectActiveListContains(u8 id);
 void FieldEffectActiveListClear(void);
 void ReturnToFieldFromFlyMapSelect(void);
-u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority);
+u8 AddNewGameCarterObject(s16 x, s16 y, u8 subpriority);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void FldEff_TeleportWarpOut(void);

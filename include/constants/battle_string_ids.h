@@ -224,7 +224,7 @@
 #define STRINGID_WILDPKMNFLED               224
 #define STRINGID_NORUNNINGFROMTRAINERS      225
 #define STRINGID_CANTESCAPE                 226
-#define STRINGID_DONTLEAVEBIRCH             227
+#define STRINGID_DONTLEAVECARTER             227
 #define STRINGID_BUTNOTHINGHAPPENED         228
 #define STRINGID_BUTITFAILED                229
 #define STRINGID_ITHURTCONFUSION            230
@@ -563,7 +563,7 @@
 
 // gNoEscapeStringIds
 #define B_MSG_CANT_ESCAPE          0
-#define B_MSG_DONT_LEAVE_BIRCH     1
+#define B_MSG_DONT_LEAVE_CARTER     1
 #define B_MSG_PREVENTS_ESCAPE      2
 #define B_MSG_CANT_ESCAPE_2        3
 #define B_MSG_ATTACKER_CANT_ESCAPE 4

@@ -6,7 +6,7 @@ LittlerootTown_MapScripts::
 
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
 	@ 1: Met Rival
-	@ 2: Saving Birch
+	@ 2: Saving Carter
 	@ 3: Received Pokedex
 	@ 4: Received Running Shoes
 
@@ -38,7 +38,7 @@ LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	call Common_EventScript_SetupRivalGfxId
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_MoveMomToMaysDoor
-	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_SetTwinPos
+	call_if_unset FLAG_RESCUED_CARTER, LittlerootTown_EventScript_SetTwinPos
 	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
@@ -205,40 +205,40 @@ LittlerootTown_Movement_PlayerStepOffTruck:
 LittlerootTown_EventScript_BeginDexUpgradeScene::
 	lockall
 	playse SE_PIN
-	applymovement LOCALID_LITTLEROOT_BIRCH, Common_Movement_ExclamationMark
+	applymovement LOCALID_LITTLEROOT_CARTER, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 80
-	msgbox LittlerootTown_Text_BirchSomethingToShowYouAtLab, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_CarterSomethingToShowYouAtLab, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_CARTER
 	delay 20
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, 5
+	warp MAP_LITTLEROOT_TOWN_PROFESSOR_CARTERS_LAB, 6, 5
 	waitstate
 	releaseall
 	end
 
 LittlerootTown_OnWarp:
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_SetRivalCarterPosForDexUpgrade
 	.2byte 0
 
-LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade::
-	addobject LOCALID_LITTLEROOT_BIRCH
+LittlerootTown_EventScript_SetRivalCarterPosForDexUpgrade::
+	addobject LOCALID_LITTLEROOT_CARTER
 	addobject LOCALID_LITTLEROOT_RIVAL
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeMale
-	goto LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale
+	goto_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetRivalCarterPosForDexUpgradeMale
+	goto LittlerootTown_EventScript_SetRivalCarterPosForDexUpgradeFemale
 	end
 
-LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeMale::
+LittlerootTown_EventScript_SetRivalCarterPosForDexUpgradeMale::
 	setobjectxy LOCALID_LITTLEROOT_RIVAL, 6, 10
-	setobjectxy LOCALID_LITTLEROOT_BIRCH, 5, 10
+	setobjectxy LOCALID_LITTLEROOT_CARTER, 5, 10
 	end
 
-LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale::
+LittlerootTown_EventScript_SetRivalCarterPosForDexUpgradeFemale::
 	setobjectxy LOCALID_LITTLEROOT_RIVAL, 13, 10
-	setobjectxy LOCALID_LITTLEROOT_BIRCH, 14, 10
+	setobjectxy LOCALID_LITTLEROOT_CARTER, 14, 10
 	end
 
 LittlerootTown_EventScript_FatMan::
@@ -246,20 +246,20 @@ LittlerootTown_EventScript_FatMan::
 	end
 
 LittlerootTown_EventScript_Boy::
-	msgbox LittlerootTown_Text_BirchSpendsDaysInLab, MSGBOX_NPC
+	msgbox LittlerootTown_Text_CarterSpendsDaysInLab, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_Twin::
 	lock
 	faceplayer
 	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_GoodLuck
-	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_YouSavedBirch
-	goto_if_ne VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_GoSaveBirch
+	goto_if_set FLAG_RESCUED_CARTER, LittlerootTown_EventScript_YouSavedCarter
+	goto_if_ne VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_GoSaveCarter
 	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
 	release
 	end
 
-LittlerootTown_EventScript_GoSaveBirch::
+LittlerootTown_EventScript_GoSaveCarter::
 	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
 	closemessage
@@ -269,9 +269,9 @@ LittlerootTown_EventScript_GoSaveBirch::
 	release
 	end
 
-LittlerootTown_EventScript_YouSavedBirch::
+LittlerootTown_EventScript_YouSavedCarter::
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_YouSavedBirch, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_YouSavedCarter, MSGBOX_DEFAULT
 	release
 	end
 
@@ -372,7 +372,7 @@ LittlerootTown_Movement_TwinReturnRight:
 	walk_in_place_faster_down
 	step_end
 
-LittlerootTown_EventScript_GoSaveBirchTrigger::
+LittlerootTown_EventScript_GoSaveCarterTrigger::
 	lockall
 	applymovement LOCALID_LITTLEROOT_TWIN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
@@ -391,15 +391,15 @@ LittlerootTown_EventScript_TownSign::
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
 	end
 
-LittlerootTown_EventScript_BirchsLabSign::
-	msgbox LittlerootTown_Text_ProfBirchsLab, MSGBOX_SIGN
+LittlerootTown_EventScript_CartersLabSign::
+	msgbox LittlerootTown_Text_ProfCartersLab, MSGBOX_SIGN
 	end
 
 LittlerootTown_EventScript_BrendansHouseSign::
 	lockall
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_PlayersHouseSignMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_BirchsHouseSignFemale
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_CartersHouseSignFemale
 	releaseall
 	end
 
@@ -407,20 +407,20 @@ LittlerootTown_EventScript_PlayersHouseSignMale::
 	msgbox LittlerootTown_Text_PlayersHouse, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_EventScript_BirchsHouseSignFemale::
-	msgbox LittlerootTown_Text_ProfBirchsHouse, MSGBOX_DEFAULT
+LittlerootTown_EventScript_CartersHouseSignFemale::
+	msgbox LittlerootTown_Text_ProfCartersHouse, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_MaysHouseSign::
 	lockall
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_BirchsHouseSignMale
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_CartersHouseSignMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_PlayersHouseSignFemale
 	releaseall
 	end
 
-LittlerootTown_EventScript_BirchsHouseSignMale::
-	msgbox LittlerootTown_Text_ProfBirchsHouse, MSGBOX_DEFAULT
+LittlerootTown_EventScript_CartersHouseSignMale::
+	msgbox LittlerootTown_Text_ProfCartersHouse, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_PlayersHouseSignFemale::
@@ -921,9 +921,9 @@ LittlerootTown_Text_WaitPlayer:
 
 LittlerootTown_Text_WearTheseRunningShoes:
 	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
-	.string "introduce yourself to PROF. BIRCH?\p"
+	.string "introduce yourself to PROF. CARTER?\p"
 	.string "Oh! What an adorable POKéMON!\n"
-	.string "You got it from PROF. BIRCH. How nice!\p"
+	.string "You got it from PROF. CARTER. How nice!\p"
 	.string "You're your father's child, all right.\n"
 	.string "You look good together with POKéMON!\p"
 	.string "Here, honey! If you're going out on an\n"
@@ -957,11 +957,11 @@ LittlerootTown_Text_CanUsePCToStoreItems:
 	.string "and POKéMON.\p"
 	.string "The power of science is staggering!$"
 
-LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "PROF. BIRCH spends days in his LAB\n"
+LittlerootTown_Text_CarterSpendsDaysInLab:
+	.string "PROF. CARTER spends days in his LAB\n"
 	.string "studying, then he'll suddenly go out in\l"
 	.string "the wild to do more research…\p"
-	.string "When does PROF. BIRCH spend time\n"
+	.string "When does PROF. CARTER spend time\n"
 	.string "at home?$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
@@ -982,8 +982,8 @@ LittlerootTown_Text_CanYouGoSeeWhatsHappening:
 	.string "Can you go see what's happening\n"
 	.string "for me?$"
 
-LittlerootTown_Text_YouSavedBirch:
-	.string "You saved PROF. BIRCH!\n"
+LittlerootTown_Text_YouSavedCarter:
+	.string "You saved PROF. CARTER!\n"
 	.string "I'm so glad!$"
 
 LittlerootTown_Text_GoodLuckCatchingPokemon:
@@ -994,17 +994,17 @@ LittlerootTown_Text_TownSign:
 	.string "LITTLEROOT TOWN\n"
 	.string "“A town that can't be shaded any hue.”$"
 
-LittlerootTown_Text_ProfBirchsLab:
-	.string "PROF. BIRCH'S POKéMON LAB$"
+LittlerootTown_Text_ProfCartersLab:
+	.string "PROF. CARTER'S POKéMON LAB$"
 
 LittlerootTown_Text_PlayersHouse:
 	.string "{PLAYER}'s HOUSE$"
 
-LittlerootTown_Text_ProfBirchsHouse:
-	.string "PROF. BIRCH'S HOUSE$"
+LittlerootTown_Text_ProfCartersHouse:
+	.string "PROF. CARTER'S HOUSE$"
 
-LittlerootTown_Text_BirchSomethingToShowYouAtLab:
-	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
+LittlerootTown_Text_CarterSomethingToShowYouAtLab:
+	.string "PROF. CARTER: Well, well, {PLAYER}{KUN}!\n"
 	.string "That was good work out there!\p"
 	.string "I knew there was something special\n"
 	.string "about you when I first saw you,\l"

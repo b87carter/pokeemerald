@@ -229,7 +229,7 @@ SECTIONS {
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
         src/time_events.o(.text);
-        src/birch_pc.o(.text);
+        src/carter_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/battle_records.o(.text);
@@ -1012,7 +1012,7 @@ SECTIONS {
         sound/songs/midi/mus_encounter_male.o(.rodata);
         sound/songs/midi/mus_abandoned_ship.o(.rodata);
         sound/songs/midi/mus_fortree.o(.rodata);
-        sound/songs/midi/mus_birch_lab.o(.rodata);
+        sound/songs/midi/mus_carter_lab.o(.rodata);
         sound/songs/midi/mus_b_tower_rs.o(.rodata);
         sound/songs/midi/mus_encounter_swimmer.o(.rodata);
         sound/songs/midi/mus_cave_of_origin.o(.rodata);
