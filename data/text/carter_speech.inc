@@ -1,8 +1,8 @@
 gText_Carter_Welcome::
-	.string "Hi! Sorry to keep you waiting!\p"
-	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is CARTER.\p"
-	.string "But everyone calls me the POKéMON\n"
+	.string "Hey dude! Welcome to your\n"
+	.string "own POKéMON Emerald!\p"
+	.string "This is BEN, but here everyone\n"
+	.string "just calls me the POKéMON\l"
 	.string "PROFESSOR.\p"
 	.string "$"
 
@@ -55,11 +55,10 @@ gText_Carter_YourePlayer::
 
 gText_Carter_AreYouReady::
 	.string "All right, are you ready?\p"
-	.string "Your very own adventure is about\n"
-	.string "to unfold.\p"
-	.string "Take courage, and leap into the\n"
-	.string "world of POKéMON where dreams,\l"
-	.string "adventure, and friendships await!\p"
-	.string "Well, I'll be expecting you later.\n"
+	.string "Your adventure is about to unfold.\p"
+	.string "Have fun as you leap back into\n"
+	.string "the world of POKéMON that we\l"
+	.string "cherished as kids!\p"
+	.string "I'll be expecting you later.\n"
 	.string "Come see me in my POKéMON LAB.\p"
 	.string "$"
